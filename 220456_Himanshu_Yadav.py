@@ -20,7 +20,7 @@ from sklearn.preprocessing import MinMaxScaler
 df = pd.read_csv('pred.csv')
 
 # Fill null values in 'Close' column with the last valid observation
-df['Close'] = df['Close'].fillna(method='ffill')
+df['Close'] = df['Close'].ffill()
 
 # Extract the 'Close' column
 data = df['Close'].values.reshape(-1, 1)
@@ -78,7 +78,7 @@ def predict_func(data):
     """
     # Preprocess the data
     scaler = MinMaxScaler(feature_range=(0, 1))
-    close_data = data['Close'].fillna(method='ffill')  # Fill null values with the last valid observation
+    close_data = data['Close'].ffill()  # Fill null values with the last valid observation
     scaled_data = scaler.fit_transform(close_data.values.reshape(-1, 1))
 
     # Prepare the input sequences
