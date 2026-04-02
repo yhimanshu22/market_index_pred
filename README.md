@@ -9,9 +9,9 @@ The codebase has been refactored into a scalable, modular architecture with Sing
 ```text
 Market-Index-Prediction/
 ├── data/                      # Dataset directory
-│   ├── pred.csv               # Training sequences
-│   ├── sample_input.csv       # Evaluation sequences
-│   └── sample_close.txt       # Ground truth targets
+│   ├── training_index_data.csv    # Training sequences
+│   ├── evaluation_index_data.csv  # Evaluation sequences
+│   └── ground_truth_close_prices.txt # Ground truth targets
 ├── models/                    # Saved artifacts
 │   ├── saved_model.keras      # Trained LSTM network
 │   └── scaler.pkl             # Fitted MinMaxScaler

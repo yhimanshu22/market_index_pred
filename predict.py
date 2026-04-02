@@ -22,14 +22,16 @@ def evaluate_predictions():
         return
 
     # Load sample inputs to test
-    print("Loading test input sequences...")
-    df_sample = load_and_clean_data('data/sample_input.csv')
-    actual_close_values = np.loadtxt('data/sample_close.txt')
+    print("Loading test input sequences with technical indicators...")
+    df_sample = load_and_clean_data('data/evaluation_index_data.csv', include_indicators=True)
+    actual_close_values = np.loadtxt('data/ground_truth_close_prices.txt')
 
+    # Define features to use (must match train.py)
+    features = ['Close', 'Open', 'High', 'Low', 'Volume', 'SMA_20', 'EMA_20', 'RSI']
+    sequence_length = 20
+    
     # Get recent sequences for predicting
-    # We require the `sequence_length` (10) most recent points as the seed
-    sequence_length = 10
-    recent_data = df_sample['Close'].values[-sequence_length:].reshape(-1, 1)
+    recent_data = df_sample[features].values[-sequence_length:]
 
     print("Generating predictions...")
     predictions = predict_next_steps(
